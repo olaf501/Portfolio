@@ -1,17 +1,22 @@
 from django.db import models
 
 class Project(models.Model):
-    CATEGORY_CHOICES = [
-        ('GAME_DEV', 'Game Development'),
-        ('VLSI', 'VLSI & Chip Design'),
-        ('AI', 'Artificial Intelligence'),
-    ]
-
-    title = models.CharField(max_length=200)
-    category = models.CharField(max_length=10, choices=CATEGORY_CHOICES)
+    project_name = models.CharField(max_length=200)
     description = models.TextField()
-    technologies = models.CharField(max_length=200, help_text="Comma-separated list (e.g., C++, Verilog, PyTorch)")
-    github_link = models.URLField(blank=True, null=True)
+    tech_stack = models.CharField(max_length=200)
+    link = models.URLField(blank=True, null=True)
 
     def __str__(self):
-        return f"{self.get_category_display()} - {self.title}"
+        return self.project_name
+
+class PersonalInformation(models.Model):
+    first_name = models.CharField(max_length=100)
+    middle_name = models.CharField(max_length=100, blank=True, null=True)
+    last_name = models.CharField(max_length=100)
+    summary = models.TextField()
+    contact_number = models.CharField(max_length=20)
+    email = models.EmailField()
+    address = models.TextField()
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"

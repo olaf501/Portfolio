@@ -4,53 +4,229 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Engineering Portfolio</title>
+    <!-- Google Fonts for crisp tech typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; margin: 0; padding: 0; background: #f4f6f9; color: #333; }
-        header { background: #1a252f; color: #fff; padding: 40px 20px; text-align: center; }
-        .container { max-width: 900px; margin: 30px auto; padding: 0 20px; }
-        .section { background: #fff; padding: 25px; margin-bottom: 25px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-        h2 { color: #2c3e50; border-bottom: 2px solid #ecf0f1; padding-bottom: 10px; }
-        .skill-group { margin-bottom: 12px; }
-        .skill-title { font-weight: bold; color: #34495e; }
-        .project-card { border-left: 4px solid #3498db; padding-left: 15px; margin-bottom: 20px; }
-        .project-category { font-size: 0.85em; text-transform: uppercase; color: #e67e22; font-weight: bold; }
-        .tech-badge { display: inline-block; background: #e8f4fd; color: #2b7de9; padding: 3px 8px; font-size: 0.85em; border-radius: 4px; margin-top: 5px; }
-        .btn { display: inline-block; background: #2c3e50; color: white; padding: 8px 15px; text-decoration: none; border-radius: 4px; font-size: 0.9em; margin-top: 10px; }
-        .btn:hover { background: #34495e; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        /* Top Header Navigation */
+        header {
+            background-color: #0f172a;
+            color: #ffffff;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.25rem;
+            letter-spacing: -0.05em;
+            color: #38bdf8;
+        }
+
+        /* Responsive Layout Grid */
+        .main-container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 1.5rem;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .main-container {
+                grid-template-columns: 350px 1fr;
+            }
+        }
+
+        /* Profile Block Styling */
+        .profile-panel {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+            border: 1px solid #e2e8f0;
+            height: fit-content;
+        }
+
+        .profile-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #0284c7;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 1.25rem;
+        }
+
+        .profile-bio {
+            font-size: 0.95rem;
+            color: #475569;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-info {
+            font-size: 0.875rem;
+            color: #64748b;
+            border-top: 1px solid #f1f5f9;
+            padding-top: 1rem;
+        }
+
+        /* Project Card Styling */
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .projects-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgb(0 0 0 / 0.1);
+            border: 1px solid #e2e8f0;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+        }
+
+        .project-header {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #0f172a;
+            margin-bottom: 0.75rem;
+        }
+
+        .project-desc {
+            font-size: 0.95rem;
+            color: #475569;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tech-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .tech-tag {
+            background-color: #f1f5f9;
+            color: #334155;
+            font-size: 0.8rem;
+            font-weight: 500;
+            padding: 0.25rem 0.75rem;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+        }
     </style>
 </head>
 <body>
+
+    
     <header>
-        <h1>{{ name }}</h1>
-        <p style="max-width: 600px; margin: 10px auto 0;">{{ bio }}</p>
+        <div class="header-container">
+            <div class="logo">COMPUTER ENGINEER PORTFOLIO</div>
+        </div>
     </header>
-    <div class="container">
-        <div class="section">
-            <h2>⚡ Technical Core Skills</h2>
-            {% for category, items in skills.items %}
-                <div class="skill-group">
-                    <span class="skill-title">{{ category }}:</span> {{ items }}
+
+   
+    <main class="main-container">
+        
+        
+        <aside class="profile-panel">
+            {% if personal_info %}
+                <h2 class="profile-name">{{ personal_info.first_name }} {{ personal_info.last_name }}</h2>
+                <div class="profile-title">Computer Engineering Profile</div>
+                
+               
+                <p class="profile-bio" style="white-space: pre-line;">{{ personal_info.summary }}</p>
+                
+                <div class="contact-info" style="display: flex; flex-direction: column; gap: 0.5rem;">
+                    <p>Email Address: {{ personal_info.email }}</p>
+                 
+                    {% if personal_info.contact_number %}
+                        <p>Contact Number: {{ personal_info.contact_number }}</p>
+                    {% endif %}
+                 
+                    {% if personal_info.address %}
+                        <p style="margin-top: 0.5rem; font-size: 0.8rem; line-height: 1.4;">Address: {{ personal_info.address }}</p>
+                    {% endif %}
                 </div>
-            {% endfor %}
-        </div>
-        <div class="section">
-            <h2>📂 Featured Engineering Projects</h2>
-            {% if projects %}
-                {% for project in projects %}
-                    <div class="project-card">
-                        <div class="project-category">{{ project.get_category_display }}</div>
-                        <h3 style="margin: 5px 0;">{{ project.title }}</h3>
-                        <p style="margin: 5px 0;">{{ project.description }}</p>
-                        <div class="tech-badge">Built with: {{ project.technologies }}</div>
-                        {% if project.github_link %}
-                            <br><a href="{{ project.github_link }}" class="btn" target="_blank">View Code</a>
-                        {% endif %}
-                    </div>
-                {% endfor %}
             {% else %}
-                <p>No projects added yet. Log into the Django Admin panel to populate items!</p>
+                <h2 class="profile-name">Engineering Profile</h2>
+                <div class="profile-title">Hardware & Software</div>
+                <p class="profile-bio">Welcome to my engineering workstation setup. Log into the admin portal to populate your dynamic profile summary context.</p>
             {% endif %}
-        </div>
-    </div>
+        </aside>
+
+     
+        <section>
+            <h2 class="section-title"> Featured Engineering Projects</h2>
+            <div class="projects-grid">
+                {% for project in projects %}
+                    <article class="project-card">
+                        <h3 class="project-header">{{ project.project_name }}</h3>
+                        <p class="project-desc">{{ project.description }}</p>
+                        <div class="tech-container">
+                            <span class="tech-label">Stack:</span>
+                            <span class="tech-tag">{{ project.tech_stack }}</span>
+                        </div>
+                    </article>
+                {% empty %}
+                    <p style="color: #64748b;">No projects found. Please add them inside your admin dashboard panel.</p>
+                {% endfor %}
+            </div>
+        </section>
+
+    </main>
+
 </body>
 </html>

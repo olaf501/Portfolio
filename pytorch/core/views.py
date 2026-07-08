@@ -1,17 +1,23 @@
-from django.shortcuts import render
-from .models import Project
+from django.shortcuts import render, get_object_or_404
+from .models import Project, PersonalInformation
 
-def home(request):
+def project_list_view(request):
+    # Fetch all projects from the database
     projects = Project.objects.all()
+    # Fetch your personal information profile row
+    personal_info = PersonalInformation.objects.first()
+    
     context = {
-        'name': 'GARCIA, OLAF IZAHK M.',
-        'bio': 'Engineer operating at the intersection of complex software systems, hardware architecture, and intelligent computing.',
-        'skills': {
-            'Languages': 'Python, C++, Verilog, VHDL, GLSL/HLSL, SQL',
-            'Game Dev': 'Unreal Engine, Unity, Physics Engines, Graphics Pipelines',
-            'VLSI & Chip Design': 'RTL Coding, Logic Synthesis, Static Timing Analysis (STA), FPGA',
-            'Artificial Intelligence': 'PyTorch, TensorFlow, CNNs, Reinforcement Learning, Core Math'
-        },
-        'projects': projects
+        'projects': projects,
+        'personal_info': personal_info
     }
-    return render(request, 'core/home.html', context)
+    return render(request, 'Core/home.html', context)
+
+def project_detail_view(request, project_id):
+    # Fetch the precise project or return a 404 error if it's missing
+    project = get_object_or_404(Project, id=project_id)
+    
+    context = {
+        'project': project
+    }
+    return render(request, 'Core/detail.html', context)
