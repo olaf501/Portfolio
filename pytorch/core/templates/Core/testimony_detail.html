@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Testimony Detail</title>
+    <style>
+        body { font-family: sans-serif; background: #0f172a; color: #f8fafc; padding: 2rem; }
+        .card { max-width: 600px; margin: 0 auto; background: #1e293b; padding: 2rem; border-radius: 8px; }
+        h2 { color: #38bdf8; margin-top: 0; }
+        p { line-height: 1.6; color: #cbd5e1; }
+        .btn { background: #475569; color: #fff; padding: 0.6rem 1.2rem; border-radius: 4px; text-decoration: none; display: inline-block; margin-top: 1rem; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>Testimony from {{ testimony.full_name }}</h2>
+        <p>"{{ testimony.content }}"</p>
+        <small style="color: #64748b;">Posted on: {{ testimony.created_at|date:"F d, Y - H:i" }}</small>
+        <br>
+        <a href="{% url 'testimony_list' %}" class="btn">Back to All Testimonies</a>
+    </div>
+</body>
+</html>
