@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Testimonies | Engineering Portfolio</title>
+    <style>
+        body { font-family: sans-serif; background: #0f172a; color: #f8fafc; padding: 2rem; }
+        .container { max-width: 800px; margin: 0 auto; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+        .card { background: #1e293b; padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem; border-left: 4px solid #38bdf8; }
+        .card a { color: #38bdf8; text-decoration: none; font-size: 1.2rem; font-weight: bold; }
+        .btn { background: #38bdf8; color: #0f172a; padding: 0.6rem 1.2rem; border-radius: 4px; font-weight: bold; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h2 style="color:#38bdf8; margin:0;">User Testimonies</h2>
+            <div>
+                <a href="{% url 'add_testimony' %}" class="btn">+ Leave Testimony</a>
+                <a href="{% url 'project_list' %}" class="btn" style="background:#475569; color:#fff; margin-left:0.5rem;">Home</a>
+            </div>
+        </div>
+        
+        {% for testimony in testimonies %}
+            <div class="card">
+                <a href="{% url 'testimony_detail' testimony.pk %}">{{ testimony.full_name }}</a>
+                <p style="color: #94a3b8; margin-top: 0.5rem;">{{ testimony.content|truncatewords:20 }}</p>
+                <small style="color: #64748b;">Submitted on: {{ testimony.created_at|date:"M d, Y" }}</small>
+            </div>
+        {% empty %}
+            <p>No testimonies recorded yet.</p>
+        {% endfor %}
+    </div>
+</body>
+</html>
