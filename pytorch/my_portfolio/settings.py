@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-cip_axni!v(n-2^a7!(a8*99*l@b!z15y@+ei85vdympt8kto1
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
