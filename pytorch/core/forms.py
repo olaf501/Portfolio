@@ -1,15 +1,46 @@
 from django import forms
-from .models import Project, Testimony, Inquiry
+from django.contrib.auth.forms import AuthenticationForm
+from .models import Project, TechStack, Testimony, Inquiry
+
+
+
+class SuperuserLoginForm(AuthenticationForm):
+    def confirm_login_allowed(self, user):
+        super().confirm_login_allowed(user)
+        if not user.is_superuser:
+            raise forms.ValidationError(
+                "Access restricted to admin/superuser accounts only.",
+                code='superuser_required',
+            )
+
+
 
 class ProjectForm(forms.ModelForm):
+    tech_stacks = forms.ModelMultipleChoiceField(
+        queryset=TechStack.objects.all(),
+        widget=forms.CheckboxSelectMultiple, 
+        required=True
+    )
+
     class Meta:
         model = Project
-        fields = ['project_name', 'description', 'tech_stack']
+        fields = ['project_name', 'description', 'tech_stacks', 'link']
         widgets = {
             'project_name': forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'Project Title'}),
             'description': forms.Textarea(attrs={'class': 'form-input', 'rows': 4, 'placeholder': 'Project Description'}),
-            'tech_stack': forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'e.g. Python, Django, SQLite'}),
+            'link': forms.URLInput(attrs={'class': 'form-input', 'placeholder': 'https://example.com'}),
         }
+
+
+class TechStackForm(forms.ModelForm):
+    class Meta:
+        model = TechStack
+        fields = ['name']
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'e.g. Python, Django, SQLite'}),
+        }
+
+
 
 class TestimonyForm(forms.ModelForm):
     class Meta:
@@ -19,6 +50,7 @@ class TestimonyForm(forms.ModelForm):
             'full_name': forms.TextInput(attrs={'class': 'form-input', 'placeholder': 'Your Full Name'}),
             'content': forms.Textarea(attrs={'class': 'form-input', 'rows': 4, 'placeholder': 'Write your feedback...'}),
         }
+
 
 class InquiryForm(forms.ModelForm):
     class Meta:
@@ -32,4 +64,3 @@ class InquiryForm(forms.ModelForm):
             'address': forms.Textarea(attrs={'class': 'form-input', 'rows': 2, 'placeholder': 'Address'}),
             'message': forms.Textarea(attrs={'class': 'form-input', 'rows': 4, 'placeholder': 'Your message or inquiry...'}),
         }
-        
